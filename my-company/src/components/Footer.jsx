@@ -6,7 +6,7 @@ function Footer() {
             textAlign: "center",
             marginTop: "2rem"
         }}>
-            <p>© 2025 My Company. All rights reserved.</p>
+            <p style={{ fontSize: '12px' }}>© 2025 My Company. All rights reserved.</p>
         </footer>
     );
 }
