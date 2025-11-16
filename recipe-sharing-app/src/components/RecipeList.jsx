@@ -1,3 +1,4 @@
+// src/components/RecipeList.jsx
 import useRecipeStore from './recipeStore';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -10,7 +11,7 @@ const RecipeList = () => {
 
     useEffect(() => {
         filterRecipes();
-    }, [searchTerm, filterRecipes]);
+    }, [searchTerm, recipes, filterRecipes]); // ← safe now
 
     const listToDisplay = searchTerm ? filteredRecipes : recipes;
 
@@ -20,7 +21,6 @@ const RecipeList = () => {
                 <div key={recipe.id}>
                     <h3>{recipe.title}</h3>
                     <p>{recipe.description}</p>
-
                     <Link to={`/recipe/${recipe.id}`}>
                         <button>View Details</button>
                     </Link>
