@@ -18,7 +18,6 @@ const RecipeDetails = ({ recipeId }) => {
             <h1>{recipe.title}</h1>
             <p>{recipe.description}</p>
 
-            {/* Edit button or EditRecipeForm */}
             {isEditing ? (
                 <EditRecipeForm
                     recipe={recipe}
@@ -28,7 +27,6 @@ const RecipeDetails = ({ recipeId }) => {
                 <button onClick={() => setIsEditing(true)}>Edit</button>
             )}
 
-            {/* Delete button */}
             <DeleteRecipeButton recipeId={recipe.id} />
         </div>
     );
