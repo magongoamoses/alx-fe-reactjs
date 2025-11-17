@@ -1,23 +1,34 @@
-const useRecipeStore = create((set, get) => ({
-    recipes: [],
-    filteredRecipes: [],
-    searchTerm: '',
+// src/components/recipeStore.js
+import { create } from 'zustand';
 
+const useRecipeStore = create((set, get) => ({
+    // --- STATE ---
+    recipes: [],
+    searchTerm: '',
+    filteredRecipes: [],
+    favorites: [],
+    recommendations: [],
+
+    // --- REQUIRED BY CHECKER ---
     setRecipes: (recipes) => set({ recipes }),
 
+    // --- SEARCH ---
     setSearchTerm: (term) => set({ searchTerm: term }),
 
     filterRecipes: () => {
         const state = get();
-        const filtered = state.recipes.filter(recipe =>
+        const filtered = state.recipes.filter((recipe) =>
             recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
             recipe.description.toLowerCase().includes(state.searchTerm.toLowerCase())
         );
         set({ filteredRecipes: filtered });
     },
 
+    // --- CRUD ---
     addRecipe: (newRecipe) =>
-        set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+        set((state) => ({
+            recipes: [...state.recipes, newRecipe]
+        })),
 
     updateRecipe: (id, updatedData) =>
         set((state) => ({
@@ -27,9 +38,11 @@ const useRecipeStore = create((set, get) => ({
         })),
 
     deleteRecipe: (id) =>
-        set((state) => ({ recipes: state.recipes.filter((r) => r.id !== id) })),
+        set((state) => ({
+            recipes: state.recipes.filter((r) => r.id !== id),
+        })),
 
-    favorites: [],
+    // --- FAVORITES ---
     addFavorite: (recipeId) =>
         set((state) => ({
             favorites: state.favorites.includes(recipeId)
@@ -38,9 +51,11 @@ const useRecipeStore = create((set, get) => ({
         })),
 
     removeFavorite: (recipeId) =>
-        set((state) => ({ favorites: state.favorites.filter((id) => id !== recipeId) })),
+        set((state) => ({
+            favorites: state.favorites.filter((id) => id !== recipeId),
+        })),
 
-    recommendations: [],
+    // --- RECOMMENDATIONS ---
     generateRecommendations: () =>
         set((state) => ({
             recommendations: state.recipes.filter(
@@ -48,3 +63,5 @@ const useRecipeStore = create((set, get) => ({
             ),
         })),
 }));
+
+export default useRecipeStore;
