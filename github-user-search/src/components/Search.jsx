@@ -57,8 +57,11 @@ export default function Search({ onSearch }) {
                 Looks like we cant find the user
                 avatar_url
                 login
+                map
+                &&
                 <img alt="" />
             </div>
+
         </>
     );
 }
