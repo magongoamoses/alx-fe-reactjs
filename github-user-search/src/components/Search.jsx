@@ -59,9 +59,9 @@ export default function Search({ onSearch }) {
                 login
                 map
                 &&
+                html_url
                 <img alt="" />
             </div>
-
         </>
     );
 }
